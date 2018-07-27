@@ -14,7 +14,11 @@ mongoose.connect('mongodb://localhost/vidjot-dev', {
 .then(() => console.log('MongoDB Connected'))
 .catch(err => console.log(err));
 
-// HHandlebars Middleware
+// Load Idea model
+require('./models/Idea');
+const Idea = mongoose.model('Ideas';)
+
+// Handlebars Middleware
 app.engine('handlebars', exphbs({
   defaultLayout: 'main'
 }));
