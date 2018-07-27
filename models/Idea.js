@@ -10,7 +10,7 @@ const IdeaSchema = new Schema({
     details: {
       type: String,
       required: true
-    }
+    },
     date: {
       type: Date,
       default: Date.now

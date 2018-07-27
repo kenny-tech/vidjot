@@ -16,7 +16,7 @@ mongoose.connect('mongodb://localhost/vidjot-dev', {
 
 // Load Idea model
 require('./models/Idea');
-const Idea = mongoose.model('Ideas';)
+const Idea = mongoose.model('ideas');
 
 // Handlebars Middleware
 app.engine('handlebars', exphbs({
@@ -27,15 +27,20 @@ app.set('view engine', 'handlebars');
 // Index Route
 app.get('/', (req, res) => {
     const title = 'Welcome';
-    res.render('INDEX', {
+    res.render('index', {
         title: title
     });
 });
 
 // About Route
 app.get('/about', (req, res) => {
-    res.render('ABOUT');
+    res.render('about');
 });
+
+// Add Idea Form
+app.get('/ideas/add', (req, res) => {
+    res.render('ideas/add');
+})
 
 const port = 5000;
 
