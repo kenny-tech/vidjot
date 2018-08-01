@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const exphbs  = require('express-handlebars');
 const methodOverride = require('method-override');
 const flash = require('connect-flash');
@@ -15,9 +16,7 @@ const users = require('./routes/users')
 // Map global promise - get rid of warning
 mongoose.Promise = global.Promise;
 // Connect to mongoose
-mongoose.connect('mongodb://localhost/vidjot-dev', {
-    useMongoClient: true,
-})
+mongoose.connect('mongodb://localhost/vidjot-dev')
 .then(() => console.log('MongoDB Connected'))
 .catch(err => console.log(err));
 
@@ -30,6 +29,9 @@ app.set('view engine', 'handlebars');
 // Body parser Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// Static folder
+app.use(express.static(path.join(__dirname, 'public'))); // Set the public folder to be express static folder
 
 // Method override middleware
 app.use(methodOverride('_method'));
@@ -68,7 +70,7 @@ app.get('/about', (req, res) => {
 app.use('/ideas', ideas);
 app.use('/users', users);
 
-const port = 5000;
+const port = 5002;
 
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
